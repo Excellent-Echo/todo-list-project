@@ -14,7 +14,7 @@ var DB = config.Connection()
 func GetAllUser(c *gin.Context) {
 	var users []entity.User
 
-	if err := DB.Preload("Todos").Find(&users).Error; err != nil {
+	if err := DB.Preload("UserDetail").Preload("Todos").Find(&users).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status":        "error in internal server",
 			"message_error": err.Error(),
@@ -30,7 +30,7 @@ func GetUserByID(c *gin.Context) {
 
 	id := c.Param("user_id")
 
-	if err := DB.Where("id = ?", id).Find(&user).Error; err != nil {
+	if err := DB.Where("id = ?", id).Preload("UserDetail").Preload("Todos").Find(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status":        "error bad request",
 			"message_error": err.Error(),
