@@ -20,7 +20,8 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/users", userHandler.ShowUserHandler)
-	r.POST("/users", userHandler.CreateUserHandler)
+	r.POST("/users/register", userHandler.CreateUserHandler)
+	// r.POST("/users/login", userHandler.CreateUserHandler)
 	// r.GET("/users/:user_id", handler.GetUserByID)
 	// r.POST("/users", handler.CreateNewUser)
 	// r.PUT("/users/:user_id", handler.UpdateUserByID)
