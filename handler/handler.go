@@ -35,38 +35,6 @@ func GetUserByID(c *gin.Context) {
 	c.JSON(http.StatusOK, user)
 }
 
-func CreateNewUser(c *gin.Context) {
-	var getUser entity.UserInput
-
-	if err := c.ShouldBindJSON(&getUser); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"status":        "error bad request",
-			"message_error": err.Error(),
-		})
-		return
-	}
-
-	var newUser = entity.User{
-		FirstName: getUser.FirstName,
-		LastName:  getUser.LastName,
-		Email:     getUser.Email,
-		Password:  getUser.Password,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-	}
-
-	if err := DB.Create(&newUser).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"status":        "error in internal server",
-			"message_error": err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusCreated, newUser)
-
-}
-
 func DeleteByUserID(c *gin.Context) {
 	id := c.Param("user_id")
 
