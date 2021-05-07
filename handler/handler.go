@@ -11,20 +11,6 @@ import (
 
 var DB = config.Connection()
 
-func GetAllUser(c *gin.Context) {
-	var users []entity.User
-
-	if err := DB.Preload("UserDetail").Preload("Todos").Find(&users).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"status":        "error in internal server",
-			"message_error": err.Error(),
-		})
-		return
-	}
-
-	c.JSON(http.StatusOK, users)
-}
-
 func GetUserByID(c *gin.Context) {
 	var user entity.User
 
