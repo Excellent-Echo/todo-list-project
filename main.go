@@ -21,10 +21,11 @@ func main() {
 
 	r.GET("/users", userHandler.ShowUserHandler)
 	r.POST("/users/register", userHandler.CreateUserHandler)
+	r.GET("/users/:user_id", userHandler.GetUserByIDHandler)
+	r.DELETE("/users/:user_id", userHandler.DeleteUserByIDHandler)
+	r.PUT("/users/:user_id", userHandler.UpdateUserByIDHandler)
+
 	// r.POST("/users/login", userHandler.CreateUserHandler)
-	// r.GET("/users/:user_id", handler.GetUserByID)
-	// r.POST("/users", handler.CreateNewUser)
-	// r.PUT("/users/:user_id", handler.UpdateUserByID)
-	// r.DELETE("/users/:user_id", handler.DeleteByUserID)
+
 	r.Run(":4444")
 }
