@@ -51,3 +51,13 @@ func ValidateIDNumber(ID string) error {
 
 	return nil
 }
+
+// func ValidatePassword(password string) error {
+// 	if len(password) < 6 {
+// 		return errors.New("invalid password input length < 6")
+// 	}
+
+// 	// harus ada upper case, lowwer case, harus ada number dll
+
+// 	return nil
+// }

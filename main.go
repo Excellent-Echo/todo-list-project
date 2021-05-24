@@ -1,6 +1,7 @@
 package main
 
 import (
+	"todoAPIGolang/auth"
 	"todoAPIGolang/config"
 	"todoAPIGolang/handler"
 	"todoAPIGolang/user"
@@ -13,17 +14,19 @@ var (
 	DB             *gorm.DB = config.Connection()
 	userRepository          = user.NewRepository(DB)
 	userService             = user.NewService(userRepository)
-	userHandler             = handler.NewUserHandler(userService)
+	authService             = auth.NewService()
+	userHandler             = handler.NewUserHandler(userService, authService)
 )
 
 func main() {
 	r := gin.Default()
 
-	r.GET("/users", userHandler.ShowUserHandler)
+	r.GET("/users", handler.Middleware(userService, authService), userHandler.ShowUserHandler)
 	r.POST("/users/register", userHandler.CreateUserHandler)
-	r.GET("/users/:user_id", userHandler.GetUserByIDHandler)
-	r.DELETE("/users/:user_id", userHandler.DeleteUserByIDHandler)
-	r.PUT("/users/:user_id", userHandler.UpdateUserByIDHandler)
+	r.GET("/users/:user_id", handler.Middleware(userService, authService), userHandler.GetUserByIDHandler)
+	r.DELETE("/users/:user_id", handler.Middleware(userService, authService), userHandler.DeleteUserByIDHandler)
+	r.PUT("/users/:user_id", handler.Middleware(userService, authService), userHandler.UpdateUserByIDHandler)
+	r.POST("/users/login", userHandler.LoginUserHandler)
 
 	// r.POST("/users/login", userHandler.CreateUserHandler)
 
