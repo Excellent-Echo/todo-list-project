@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"strconv"
 	"todoAPIGolang/auth"
 	"todoAPIGolang/entity"
 	"todoAPIGolang/helper"
@@ -109,6 +110,18 @@ func (h *userHandler) UpdateUserByIDHandler(c *gin.Context) {
 		responseError := helper.APIResponse("input data required", 400, "bad request", gin.H{"errors": splitError})
 
 		c.JSON(400, responseError)
+		return
+	}
+
+	idParam, _ := strconv.Atoi(id)
+
+	// authorization userid dari params harus sama dengan user id yang login
+	userData := int(c.MustGet("currentUser").(int))
+
+	if idParam != userData {
+		responseError := helper.APIResponse("Unauthorize", 401, "error", gin.H{"error": "user ID not authorize"})
+
+		c.JSON(401, responseError)
 		return
 	}
 
