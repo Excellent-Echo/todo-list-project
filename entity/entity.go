@@ -11,7 +11,7 @@ type Todo struct {
 	IsComplete  bool
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
-	DeletedAt   time.Time `gorm:"index"`
+	// DeletedAt   time.Time `gorm:"index"`
 }
 
 type Category struct {
@@ -29,5 +29,5 @@ type UserDetail struct {
 	UserID      int
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
-	DeletedAt   time.Time `gorm:"index"`
+	// DeletedAt   time.Time `gorm:"index"`
 }
