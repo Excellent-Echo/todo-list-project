@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"todoAPIGolang/migration"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
@@ -24,10 +25,10 @@ func Connection() *gorm.DB {
 		panic(err.Error())
 	}
 
-	// db.AutoMigrate(&entity.User{})
-	// db.AutoMigrate(&entity.Category{})
-	// db.AutoMigrate(&entity.Todo{})
-	// db.AutoMigrate(&entity.UserDetail{})
+	db.AutoMigrate(&migration.User{})
+	db.AutoMigrate(&migration.Category{})
+	db.AutoMigrate(&migration.Todo{})
+	db.AutoMigrate(&migration.UserDetail{})
 
 	return db
 }
