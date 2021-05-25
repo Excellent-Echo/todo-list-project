@@ -12,7 +12,7 @@ type User struct {
 	Password  string    `json:"-"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-	DeletedAt time.Time `gorm:"index" json:"-"`
+	// DeletedAt time.Time `gorm:"index" json:"-"`
 	// Todos      []Todo       `gorm:"foreignKey:UserID"`
 	// UserDetail []UserDetail `gorm:"foreignKey:UserID"`
 }
