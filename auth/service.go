@@ -2,16 +2,14 @@ package auth
 
 import (
 	"errors"
-	"log"
-	"os"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/joho/godotenv"
 )
 
 var (
-	err = godotenv.Load()
-	key = os.Getenv("SECRET_KEY")
+	// err = godotenv.Load()
+	// key = os.Getenv("SECRET_KEY")
+	key = "rahasia"
 )
 
 type Service interface {
@@ -27,10 +25,6 @@ func NewService() *jwtService {
 }
 
 func (s *jwtService) GenerateToken(userID int) (string, error) {
-	if err != nil {
-		log.Println(err)
-	}
-
 	claim := jwt.MapClaims{
 		"user_id": userID,
 	}
