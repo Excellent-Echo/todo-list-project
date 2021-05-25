@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+	"os"
 	"todoAPIGolang/migration"
 
 	"gorm.io/driver/mysql"
@@ -10,14 +12,15 @@ import (
 func Connection() *gorm.DB {
 	// err := godotenv.Load()
 
-	// dbUser := os.Getenv("DB_USERNAME")
-	// dbPass := os.Getenv("DB_PASSWORD")
-	// dbHost := os.Getenv("DB_HOST")
-	// dbName := os.Getenv("DB_NAME")
+	dbUser := os.Getenv("DB_USERNAME")
+	dbPass := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
 
-	// dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbPort, dbName)
 
-	dsn := "Q6sEcExPoi:z0afMi60oe@tcp(remotemysql.com:3306)/Q6sEcExPoi?charset=utf8mb4&parseTime=True&loc=Local"
+	// dsn := "Q6sEcExPoi:z0afMi60oe@tcp(remotemysql.com:3306)/Q6sEcExPoi?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
