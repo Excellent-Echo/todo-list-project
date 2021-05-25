@@ -17,7 +17,7 @@ func Connection() *gorm.DB {
 
 	// dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
 
-	dsn := "root:@tcp(localhost)/todo_db_golang?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "Q6sEcExPoi:z0afMi60oe@tcp(remotemysql.com:3306)/Q6sEcExPoi?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
