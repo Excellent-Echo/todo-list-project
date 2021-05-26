@@ -1,9 +1,9 @@
 package entity
 
 type Category struct {
-	ID          int `gorm:"primaryKey"`
-	Name        string
-	Description string
+	ID          int    `gorm:"primaryKey" json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 	// Todos       []Todo `gorm:"foreignKey:CategoryID"`
 }
 

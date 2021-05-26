@@ -3,13 +3,13 @@ package entity
 import "time"
 
 type UserDetail struct {
-	ID          int `gorm:"primaryKey"`
-	NoHandphone uint
-	Gender      string
-	Address     string
-	UserID      int
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID          int       `gorm:"primaryKey" json:"id"`
+	NoHandphone uint      `json:"no_handphone"`
+	Gender      string    `json:"gender"`
+	Address     string    `json:"address"`
+	UserID      int       `json:"user_id"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 	// DeletedAt   time.Time `gorm:"index"`
 }
 

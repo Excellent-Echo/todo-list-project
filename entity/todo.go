@@ -3,14 +3,14 @@ package entity
 import "time"
 
 type Todo struct {
-	ID          int `gorm:"primaryKey"`
-	Title       string
-	Description string
-	CategoryID  int
-	UserID      int
-	IsComplete  bool
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	ID          int       `gorm:"primaryKey" json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	CategoryID  int       `json:"category_id"`
+	UserID      int       `json:"user_id"`
+	IsComplete  bool      `json:"is_complete"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 	// DeletedAt   time.Time `gorm:"index"`
 }
 

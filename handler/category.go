@@ -28,7 +28,7 @@ func (h *categoryhandler) GetAllCategoryhandler(c *gin.Context) {
 		return
 	}
 
-	response := helper.APIResponse("success get all todo", 200, "success", categories)
+	response := helper.APIResponse("success get all category", 200, "success", categories)
 	c.JSON(200, response)
 
 }
