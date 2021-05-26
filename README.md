@@ -1,5 +1,9 @@
 # project todo list golang 
 
+```
+https://todo-test-api-golang.herokuapp.com/
+```
+
 todo list app is an application to create and manage task, This app has : 
 * User Friendly
 * Easy to Use
@@ -20,7 +24,7 @@ todo list app is an application to create and manage task, This app has :
 ### todos
 - `GET /todos`
 - `POST /todos`
-- `GET /todos/users/:user_id`
+- `GET /todos/users`
 - `GET /todos/:todo_id`
 - `PUT /todos/:todo_id`
 - `PATCH /Todos/:todo_id/complete`
@@ -35,7 +39,7 @@ todo list app is an application to create and manage task, This app has :
 - `POST /user_details`
 - `PUT /user_details`
 
-## RESTful endpoints
+## RESTful endpoints users
 ### GET /users
 
 > Get All users
@@ -377,3 +381,12 @@ _Response (500 - Internal Server Error)_
 }
 ```
 ---
+
+## RESTful endpoints todos
+- `GET /todos` auth
+- `POST /todos` auth
+- `GET /todos/users` auth
+- `GET /todos/:todo_id` 
+- `PUT /todos/:todo_id`
+- `PATCH /Todos/:todo_id/complete`
+- `DELETE /todos/:todo_id`
