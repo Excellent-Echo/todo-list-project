@@ -1046,3 +1046,242 @@ _Response (500 - Internal Server Error)_
 }
 ```
 ---
+## RESTful endpoints userDetails
+### userDetails
+- `GET /user_details`
+- `POST /user_details`
+- `PUT /user_details`
+
+
+### GET /user_details
+> get user detail by user id login
+
+_Request Header_
+```json
+{
+   "Authorization": "<your Authorization>"
+}
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response (200)_
+```json
+{
+  "meta" : {
+      "message" : "success get user detail by user ID",
+      "code" : 200,
+      "status" : "success"
+  }, 
+  "data" : {
+        "id": 1,
+        "no_handphone": 6282333333333,
+        "gender": "male",
+        "address": "jember",
+        "user_id": 1,
+        "created_at": "2021-05-26T23:53:38.859Z",
+        "updated_at": "2021-05-26T23:53:38.859Z"
+    }
+}
+```
+
+
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "meta" : {
+      "message" : "Unauthorize",
+      "code" : 401,
+      "status" : "error"
+  }, 
+  "data" : 
+      {
+        "error" : ""
+      }
+}
+```
+
+_Response (500 - Internal Server Error)_
+```json
+{
+  "meta" : {
+      "message" : "Internal server error",
+      "code" : 500,
+      "status" : "error"
+  }, 
+  "data" : {
+      "error" : ""
+  }
+}
+```
+---
+
+### POST /user_details
+> create new user detail by user id login
+
+_Request Header_
+```json
+{
+   "Authorization": "<your Authorization>"
+}
+```
+
+_Request Body_
+```json
+{
+  "no_handphone" : 6282333333333,
+  "gender" : "male",
+  "address" : "jember"
+}
+```
+
+_Response (201)_
+```json
+{
+  "meta" : {
+      "message" : "success create new user Detail",
+      "code" : 201,
+      "status" : "success"
+  }, 
+  "data" : {
+        "id": 1,
+        "no_handphone": 6282333333333,
+        "gender": "male",
+        "address": "jember",
+        "user_id": 1,
+        "created_at": "2021-05-26T23:53:38.859Z",
+        "updated_at": "2021-05-26T23:53:38.859Z"
+    }
+}
+```
+
+_Response (400 - Bad Request)_
+```json
+{
+  "meta" : {
+      "message" : "input data required",
+      "code" : 400,
+      "status" : "bad request"
+  }, 
+  "data" : {
+      "errors" : []
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "meta" : {
+      "message" : "Unauthorize",
+      "code" : 401,
+      "status" : "error"
+  }, 
+  "data" : 
+      {
+        "error" : ""
+      }
+}
+```
+
+_Response (500 - Internal Server Error)_
+```json
+{
+  "meta" : {
+      "message" : "Internal server error",
+      "code" : 500,
+      "status" : "error"
+  }, 
+  "data" : {
+      "error" : ""
+  }
+}
+```
+---
+
+
+### PUT /user_details
+> update user detail by user id login
+
+_Request Header_
+```json
+{
+   "Authorization": "<your Authorization>"
+}
+```
+
+_Request Body_
+```json
+{
+  "gender" : "male",
+  "address" : "jember"
+}
+```
+
+_Response (201)_
+```json
+{
+  "meta" : {
+      "message" : "success update user Detail",
+      "code" : 200,
+      "status" : "success"
+  }, 
+  "data" : {
+        "id": 1,
+        "no_handphone": 6282333333333,
+        "gender": "male",
+        "address": "jember",
+        "user_id": 1,
+        "created_at": "2021-05-26T23:53:38.859Z",
+        "updated_at": "2021-05-26T23:53:38.859Z"
+    }
+}
+```
+
+_Response (400 - Bad Request)_
+```json
+{
+  "meta" : {
+      "message" : "input data required",
+      "code" : 400,
+      "status" : "bad request"
+  }, 
+  "data" : {
+      "errors" : []
+  }
+}
+```
+
+_Response (401 - Unauthorized)_
+```json
+{
+    "meta" : {
+      "message" : "Unauthorize",
+      "code" : 401,
+      "status" : "error"
+  }, 
+  "data" : 
+      {
+        "error" : ""
+      }
+}
+```
+
+_Response (500 - Internal Server Error)_
+```json
+{
+  "meta" : {
+      "message" : "Internal server error",
+      "code" : 500,
+      "status" : "error"
+  }, 
+  "data" : {
+      "error" : ""
+  }
+}
+```
+---
