@@ -13,3 +13,15 @@ type Todo struct {
 	UpdatedAt   time.Time
 	// DeletedAt   time.Time `gorm:"index"`
 }
+
+type TodoInput struct {
+	Title       string `json:"title" binding:"required"`
+	Description string `json:"description" binding:"required"`
+	CategoryID  int    `json:"category_id" binding:"required"`
+}
+
+type UpdateTodoInput struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	CategoryID  int    `json:"category_id"`
+}

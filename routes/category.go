@@ -1,9 +1,20 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"todoAPIGolang/category"
+	"todoAPIGolang/handler"
+
+	"github.com/gin-gonic/gin"
+)
+
+var (
+	categoryRepository = category.NewRepository(DB)
+	categoryService    = category.NewService(categoryRepository)
+	categoryhandler    = handler.NewCategoryHandler(categoryService, authService)
+)
 
 func CategoryRoute(r *gin.Engine) {
-	r.GET("/category")
-	r.GET("/category")
-	r.POST("/category")
+	r.GET("/categories", categoryhandler.GetAllCategoryhandler)
+	r.POST("/categories", categoryhandler.SaveNewCategoryHandler)
+	r.PUT("/categories/:category_id", categoryhandler.UpdateCategoryByIDHandler)
 }

@@ -7,24 +7,28 @@ import (
 	"time"
 	"todoAPIGolang/entity"
 	"todoAPIGolang/helper"
+	"todoAPIGolang/user"
 )
 
 type Service interface {
 	GetAllTodo() ([]entity.Todo, error)
 	GetAllTodoByUserID(userID string) ([]entity.Todo, error)
 	GetTodoByID(todoID string) (entity.Todo, error)
-	SaveNewTodo(input entity.TodoInput, CategoryID string, UserID string) (entity.Todo, error)
-	UpdateTodoByID(todoID string, dataInput entity.TodoInput) (entity.Todo, error)
+	SaveNewTodo(input entity.TodoInput, UserID string) (entity.Todo, error)
+	UpdateTodoByID(todoID string, dataInput entity.UpdateTodoInput) (entity.Todo, error)
 	DeleteTodoByID(todoID string) (interface{}, error)
 	CompleteTodo(todoID string) (entity.Todo, error)
+
+	// get todo by category
 }
 
 type service struct {
-	repository Repository
+	repository     Repository
+	userRepository user.Repository
 }
 
-func NewService(repository Repository) *service {
-	return &service{repository}
+func NewService(repository Repository, userRepository user.Repository) *service {
+	return &service{repository, userRepository}
 }
 
 func (s *service) GetAllTodo() ([]entity.Todo, error) {
@@ -36,7 +40,15 @@ func (s *service) GetAllTodo() ([]entity.Todo, error) {
 
 	return todos, nil
 }
+
 func (s *service) GetAllTodoByUserID(userID string) ([]entity.Todo, error) {
+
+	user, err := s.userRepository.FindByID(userID)
+
+	if user.ID == 0 {
+		newError := fmt.Sprintf("user id %s not found", userID)
+		return []entity.Todo{}, errors.New(newError)
+	}
 
 	todos, err := s.repository.FindAllByUserID(userID)
 
@@ -51,6 +63,11 @@ func (s *service) GetTodoByID(todoID string) (entity.Todo, error) {
 
 	todo, err := s.repository.FindByID(todoID)
 
+	if todo.ID == 0 {
+		newError := fmt.Sprintf("todo id %s not found", todoID)
+		return entity.Todo{}, errors.New(newError)
+	}
+
 	if err != nil {
 		return todo, err
 	}
@@ -58,15 +75,14 @@ func (s *service) GetTodoByID(todoID string) (entity.Todo, error) {
 	return todo, nil
 
 }
-func (s *service) SaveNewTodo(input entity.TodoInput, CategoryID string, UserID string) (entity.Todo, error) {
+func (s *service) SaveNewTodo(input entity.TodoInput, UserID string) (entity.Todo, error) {
 
 	IDUser, _ := strconv.Atoi(UserID)
-	IDCategory, _ := strconv.Atoi(CategoryID)
 
 	var newTodo = entity.Todo{
 		Title:       input.Title,
 		Description: input.Description,
-		CategoryID:  IDCategory,
+		CategoryID:  input.CategoryID,
 		UserID:      IDUser,
 		IsComplete:  false,
 		CreatedAt:   time.Now(),
@@ -80,9 +96,9 @@ func (s *service) SaveNewTodo(input entity.TodoInput, CategoryID string, UserID 
 	}
 
 	return createTodo, nil
-
 }
-func (s *service) UpdateTodoByID(todoID string, dataInput entity.TodoInput) (entity.Todo, error) {
+
+func (s *service) UpdateTodoByID(todoID string, dataInput entity.UpdateTodoInput) (entity.Todo, error) {
 	var dataUpdate = map[string]interface{}{}
 
 	if err := helper.ValidateIDNumber(todoID); err != nil {
@@ -105,6 +121,10 @@ func (s *service) UpdateTodoByID(todoID string, dataInput entity.TodoInput) (ent
 	}
 	if dataInput.Description != "" || len(dataInput.Description) != 0 {
 		dataUpdate["description"] = dataInput.Description
+	}
+
+	if dataInput.CategoryID != 0 {
+		dataUpdate["category_id"] = dataInput.CategoryID
 	}
 
 	dataUpdate["updated_at"] = time.Now()

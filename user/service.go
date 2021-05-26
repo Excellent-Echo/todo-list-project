@@ -171,7 +171,7 @@ func (s *service) UpdateUserByID(userID string, dataInput entity.UpdateUserInput
 
 	dataUpdate["updated_at"] = time.Now()
 
-	fmt.Println(dataUpdate)
+	// fmt.Println(dataUpdate)
 
 	userUpdated, err := s.repository.UpdateByID(userID, dataUpdate)
 

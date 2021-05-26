@@ -12,3 +12,15 @@ type UserDetail struct {
 	UpdatedAt   time.Time
 	// DeletedAt   time.Time `gorm:"index"`
 }
+
+type UserDetailInput struct {
+	NoHandphone uint   `json:"no_handphone" binding:"required"`
+	Gender      string `json:"gender" binding:"required"`
+	Address     string `json:"address" binding:"required"`
+}
+
+type UpdateUserDetailInput struct {
+	NoHandphone uint   `json:"no_handphone"`
+	Gender      string `json:"gender"`
+	Address     string `json:"address"`
+}
