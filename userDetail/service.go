@@ -52,7 +52,7 @@ func (s *service) GetUserDetailByUserID(userID string) (entity.UserDetail, error
 func (s *service) SaveNewUserDetail(input entity.UserDetailInput, userID string) (entity.UserDetail, error) {
 	IDUser, _ := strconv.Atoi(userID)
 
-	checkStatus, err := s.GetUserDetailByUserID(userID)
+	checkStatus, err := s.repository.FindByID(userID)
 
 	if err != nil {
 		return checkStatus, err
