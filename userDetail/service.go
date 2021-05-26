@@ -1,4 +1,4 @@
-package todo
+package userDetail
 
 type Service interface {
 }

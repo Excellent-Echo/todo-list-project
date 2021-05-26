@@ -17,3 +17,8 @@ type UpdateUserInput struct {
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`
 }
+
+type TodoInput struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
