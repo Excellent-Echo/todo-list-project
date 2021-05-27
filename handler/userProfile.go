@@ -53,11 +53,12 @@ func (h *userProfileHandler) SaveNewUserProfileHandler(c *gin.Context) {
 		return
 	}
 
-	path := fmt.Sprintf("/images/profile-%d-%s", userData, file.Filename)
+	path := fmt.Sprintf("images/profile-%d-%s", userData, file.Filename)
 
 	err = c.SaveUploadedFile(file, path)
 
 	if err != nil {
+		// log.Println("error line 63")
 		responseError := helper.APIResponse("status bad request", 400, "error", gin.H{"error": err.Error()})
 
 		c.JSON(400, responseError)
