@@ -34,3 +34,15 @@ type UpdateUserInput struct {
 	LastName  string `json:"last_name"`
 	Email     string `json:"email"`
 }
+
+type UserDetailOutput struct {
+	ID          int         `gorm:"primaryKey" json:"id"`
+	FirstName   string      `json:"first_name"`
+	LastName    string      `json:"last_name"`
+	Email       string      `json:"email"`
+	Password    string      `json:"-"`
+	CreatedAt   time.Time   `json:"created_at"`
+	UpdatedAt   time.Time   `json:"updated_at"`
+	UserProfile UserProfile `json:"user_profile"`
+	UserDetail  UserDetail  `json:"user_detail"`
+}
