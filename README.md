@@ -1,7 +1,7 @@
 # project todo list golang 
 
 ```
-https://todo-test-api-golang.herokuapp.com/
+https://todo-rest-api-golang.herokuapp.com/
 ```
 
 todo list app is an application to create and manage task, This app has : 
