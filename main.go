@@ -11,6 +11,7 @@ func main() {
 
 	routes.UserRoute(r)
 	routes.UserDetailRoute(r)
+	routes.UserProfileRoute(r)
 	routes.TodoRoute(r)
 	routes.CategoryRoute(r)
 

@@ -44,3 +44,9 @@ type User struct {
 	Todos      []Todo       `gorm:"foreignKey:UserID"`
 	UserDetail []UserDetail `gorm:"foreignKey:UserID"`
 }
+
+type UserProfile struct {
+	ID          int    `json:"id"`
+	ProfileUser string `json:"profile_user"` // kita tangkap dari file (foto) , path / dir file foto
+	UserID      int    `json:"user_id"`
+}

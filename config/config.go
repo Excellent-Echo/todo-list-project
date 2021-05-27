@@ -31,6 +31,7 @@ func Connection() *gorm.DB {
 	db.AutoMigrate(&migration.Category{})
 	db.AutoMigrate(&migration.Todo{})
 	db.AutoMigrate(&migration.UserDetail{})
+	db.AutoMigrate(&migration.UserProfile{})
 
 	return db
 }
