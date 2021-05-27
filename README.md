@@ -1313,7 +1313,7 @@ _Response (200)_
   }, 
   "data" : {
         "id": 1,
-        "profile_user" : "images/profile-7-google.com.jpg",
+        "profile_user" : "https://todo-rest-api-golang.herokuapp.com/images/profile-7-google.com.jpg",
         "user_id" : 2 
     }
 }
@@ -1374,7 +1374,7 @@ _Response (201)_
   }, 
   "data" : {
         "id": 1,
-        "profile_user" : "images/profile-7-google.com.jpg",
+        "profile_user" : "https://todo-rest-api-golang.herokuapp.com/images/profile-7-google.com.jpg",
         "user_id" : 2 
     }
 }
