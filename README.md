@@ -1047,12 +1047,6 @@ _Response (500 - Internal Server Error)_
 ```
 ---
 ## RESTful endpoints userDetails
-### userDetails
-- `GET /user_details`
-- `POST /user_details`
-- `PUT /user_details`
-
-
 ### GET /user_details
 > get user detail by user id login
 
