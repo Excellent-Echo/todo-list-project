@@ -65,9 +65,7 @@ func (h *userProfileHandler) SaveNewUserProfileHandler(c *gin.Context) {
 		return
 	}
 
-	pathProfileSave := "https://todo-rest-api-golang.herokuapp.com/" + path
-
-	userProfile, err := h.service.SavenewUserProfile(pathProfileSave, userData)
+	userProfile, err := h.service.SavenewUserProfile(path, userData)
 
 	if err != nil {
 		responseError := helper.APIResponse("Internal server error", 500, "error", gin.H{"error": err.Error()})
@@ -107,9 +105,7 @@ func (h *userProfileHandler) UpdateUserProfileByIDHandler(c *gin.Context) {
 		return
 	}
 
-	pathProfileSave := "https://todo-rest-api-golang.herokuapp.com/" + path
-
-	userProfile, err := h.service.UpdateUserProfileByID(pathProfileSave, ID)
+	userProfile, err := h.service.UpdateUserProfileByID(path, ID)
 
 	if err != nil {
 		responseError := helper.APIResponse("Internal server error", 500, "error", gin.H{"error": err.Error()})
