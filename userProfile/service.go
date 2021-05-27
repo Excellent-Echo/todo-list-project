@@ -1,6 +1,9 @@
 package userProfile
 
 import (
+	"errors"
+	"fmt"
+	"strconv"
 	"todoAPIGolang/entity"
 	"todoAPIGolang/helper"
 )
@@ -30,6 +33,16 @@ func (s *service) GetUserProfileByUserID(userID string) (entity.UserProfile, err
 }
 
 func (s *service) SavenewUserProfile(pathFile string, userID int) (entity.UserProfile, error) {
+
+	ID := strconv.Itoa(userID)
+
+	userProfileCheck, _ := s.repository.FindByUserID(ID)
+
+	if userProfileCheck.UserID == userID {
+		errooStatus := fmt.Sprintf("user profile for user id %d has been created", userID)
+		return userProfileCheck, errors.New(errooStatus)
+	}
+
 	newUserProfile := entity.UserProfile{
 		ProfileUser: pathFile,
 		UserID:      userID,

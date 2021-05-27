@@ -16,5 +16,5 @@ var (
 func UserProfileRoute(r *gin.Engine) {
 	r.GET("/user_profile", handler.Middleware(userService, authService), userProfileHandler.GetUserProfileByUserIDHandler)
 	r.POST("/user_profile", handler.Middleware(userService, authService), userProfileHandler.SaveNewUserProfileHandler)
-	// r.PUT("/user_profile") // otomatis terhubung ke user yang login
+	r.PUT("/user_profile", handler.Middleware(userService, authService), userProfileHandler.UpdateUserProfileByIDHandler) // otomatis terhubung ke user yang login
 }
