@@ -271,10 +271,39 @@ _Response (200)_
   }, 
   "data" :
       {
-        "id" : 1,
-        "first_name" : "afista",
-        "last_name" : "pratama",
-        "email" : "pratama@mail.com"
+        "id": 2,
+        "first_name": "admin",
+        "last_name": "user",
+        "email": "admin@mail.com",
+        "user_profile": {
+            "id": 1,
+            "profile_user": "https://todo-rest-api-golang.herokuapp.com/images/google.com.jpg",
+            "user_id": 2
+        },
+        "user_detail": {
+            "id": 1,
+            "no_handphone": 6283213231232,
+            "gender": "male",
+            "address": "lumajang",
+            "user_id": 2,
+            "created_at": "2021-05-06T15:21:02+07:00",
+            "updated_at": "2021-05-06T15:21:02+07:00"
+        }
+    }
+}
+```
+
+_Response (400 - Bad Request)_
+```json
+{
+  "meta" : {
+      "message" : "error bad request user ID",
+      "code" : 400,
+      "status" : "error"
+  }, 
+  "data" : 
+      {
+        "errors" : "user id <id? not found"
       }
 }
 ```

@@ -6,6 +6,8 @@ import (
 	"time"
 	"todoAPIGolang/entity"
 	"todoAPIGolang/helper"
+	"todoAPIGolang/userDetail"
+	"todoAPIGolang/userProfile"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -20,11 +22,13 @@ type Service interface {
 }
 
 type service struct {
-	repository Repository
+	repository            Repository
+	userDetailRepository  userDetail.Repository
+	userProfileRepository userProfile.Repository
 }
 
-func NewService(repo Repository) *service {
-	return &service{repo}
+func NewService(repo Repository, userDetailRepository userDetail.Repository, userProfileRepository userProfile.Repository) *service {
+	return &service{repo, userDetailRepository, userProfileRepository}
 }
 
 func (s *service) LoginUser(input entity.LoginUserInput) (entity.User, error) {
@@ -95,10 +99,24 @@ func (s *service) GetUserByID(userID string) (UserDetailFormat, error) {
 		return UserDetailFormat{}, err
 	}
 
-	user, err := s.repository.FindByIDwithUserDetailUserProfile(userID)
+	user, err := s.repository.FindByID(userID)
+	userDetail, err := s.userDetailRepository.FindByUserID(userID)
+	userProfile, err := s.userProfileRepository.FindByUserID(userID)
 
 	if err != nil {
 		return UserDetailFormat{}, err
+	}
+
+	var userData = entity.UserDetailOutput{
+		ID:          user.ID,
+		FirstName:   user.FirstName,
+		LastName:    user.LastName,
+		Email:       user.Email,
+		Password:    user.Password,
+		CreatedAt:   user.CreatedAt,
+		UpdatedAt:   user.UpdatedAt,
+		UserDetail:  userDetail,
+		UserProfile: userProfile,
 	}
 
 	if user.ID == 0 {
@@ -106,7 +124,7 @@ func (s *service) GetUserByID(userID string) (UserDetailFormat, error) {
 		return UserDetailFormat{}, errors.New(newError)
 	}
 
-	formatUser := FormatDetailUser(user)
+	formatUser := FormatDetailUser(userData)
 
 	return formatUser, nil
 }
